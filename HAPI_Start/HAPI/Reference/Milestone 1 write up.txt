@@ -1,0 +1,33 @@
+Callum Sadler
+Milestone 1 1.0 and 15/10/21
+--------------------------------
+
+New Functionality
+-----------------
+
+Made the Background colour clear to a solid colour.
+Made Stars render on the screen.
+Have Stars be given random start locations.
+Made the Stars move to user.
+Made the Stars have different colours.
+Made it so I can change the eye distance with a keyboard press.
+
+
+Code Additions
+--------------
+
+Setbackgroundcolour - to set the background colour of the screen. 
+
+Tests
+-----
+
+Rended 10000 stars - Lowers FPS.
+Changed backgound colours.
+Changed Star colours.
+Changed eye distance.
+
+Notes
+-----
+
+Add a speed value to the stars.
+Add a keybind to change the speed value of the stars.
