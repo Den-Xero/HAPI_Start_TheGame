@@ -2,7 +2,6 @@
 #include "Render.h"
 #include "Controls.h"
 
-
 enum class Sides
 {
 	ENeutral,
@@ -27,18 +26,11 @@ class Entity
 
 		virtual Sides GetSide() const = 0;
 
-		bool CheckForCollision(Entity Other)
-		{
-			// Get One Collision rect
-			// get other collision rect
-			// check for collision
+		bool CheckForCollision(Entity* One, Entity* Two);
 
-			return false;
-		}
-
-		bool IsAnEnemy(Entity One, Entity Two)
+		bool IsAnEnemy(Entity* One, Entity* Two)
 		{
-			if (One.GetSide() != Two.GetSide() )
+			if (One->GetSide() != Two->GetSide() )
 			{
 				return true;
 			}

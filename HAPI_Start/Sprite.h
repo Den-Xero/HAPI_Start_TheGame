@@ -1,6 +1,7 @@
 #pragma once
 #include <HAPI_lib.h>
-#include "Border.h"
+
+class Border;
 
 using namespace HAPISPACE;
 class Sprite
@@ -24,6 +25,8 @@ class Sprite
 		void Draw(float XPos, float YPos, BYTE* R_Screen, int R_ScreenWidth, int R_ScreenHight);
 
 		void DrawBackground(float XPos, float YPos, BYTE* R_Screen, int R_ScreenWidth);
+
+		Border PassTexBorder(const std::string& FileName);
 
 };
 

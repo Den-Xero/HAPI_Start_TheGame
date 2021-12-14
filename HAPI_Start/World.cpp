@@ -44,15 +44,20 @@ void World::Run()
 		for (Entity* P : W_EntityVec)
 			P->UpdateLoop(W_Rend);
 
-		for (size_t i = 0; i < W_EntityVec.size(); i++)
+		for (Entity* P : W_EntityVec)
 		{
-			if (W_EntityVec[i]->GetSide() != Sides::ENeutral)
+			size_t i = 0;
+			if (P->GetSide() != Sides::ENeutral)
 			{
 				for (size_t j = i + 1; j < W_EntityVec.size(); j++)
 				{
-					if(IsAnEnemy(W_EntityVec[i], W_EntityVec[j]))
+					if (P->IsAnEnemy(W_EntityVec[i], W_EntityVec[j]));
+					{
+						P->CheckForCollision(W_EntityVec[i], W_EntityVec[j]);
+					}
 				}
 			}
+			i++;
 		}
 
 	}
