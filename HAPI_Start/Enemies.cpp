@@ -3,7 +3,7 @@
 
 void Enemies::UpdateLoop(Render &Rend)
 {
-	RenderSprites(Rend);
+	RenderSprite(Rend);
 
 	srand(time(NULL));
 
@@ -24,7 +24,9 @@ void Enemies::UpdateLoop(Render &Rend)
 	Count++;
 }
 
-void Enemies::RenderSprites(Render &Rend)
+void Enemies::Setup()
 {
-	Rend.PlayerSpriteRender(E_SpriteName, XPos, YPos);
+	XPos = rand() % 1004 + 10;
+
+	YPos = rand() % 748 + 10;
 }

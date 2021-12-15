@@ -15,22 +15,28 @@ void World::Run()
 		
 	LoadLevels(W_Rend);
 
-	Enemies NewEnemies1("EnemiesSprite");
+	Enemies NewEnemies1("EnemiesSprite", "Data\\alphaThing.tga");
+	NewEnemies1.Setup();
 	W_EntityVec.push_back(&NewEnemies1);
 
-	Enemies NewEnemies2("EnemiesSprite");
+	Enemies NewEnemies2("EnemiesSprite", "Data\\alphaThing.tga");
+	NewEnemies2.Setup();
 	W_EntityVec.push_back(&NewEnemies2);
 
-	Enemies NewEnemies3("EnemiesSprite");
+	Enemies NewEnemies3("EnemiesSprite", "Data\\alphaThing.tga");
+	NewEnemies3.Setup();
 	W_EntityVec.push_back(&NewEnemies3);
 
-	Enemies NewEnemies4("EnemiesSprite");
+	Enemies NewEnemies4("EnemiesSprite", "Data\\alphaThing.tga");
+	NewEnemies4.Setup();
 	W_EntityVec.push_back(&NewEnemies4);
 
-	Enemies NewEnemies5("EnemiesSprite");
+	Enemies NewEnemies5("EnemiesSprite", "Data\\alphaThing.tga");
+	NewEnemies5.Setup();
 	W_EntityVec.push_back(&NewEnemies5);
 
-	Player NewPlayer("PlayerSprite");
+	Player NewPlayer("PlayerSprite", "Data\\playerSprite.tga");
+	NewPlayer.Setup();
 	W_EntityVec.push_back(&NewPlayer);
 
 	while (HAPI.Update())
@@ -44,9 +50,11 @@ void World::Run()
 		for (Entity* P : W_EntityVec)
 			P->UpdateLoop(W_Rend);
 
+
+		size_t i = 0;
+
 		for (Entity* P : W_EntityVec)
 		{
-			size_t i = 0;
 			if (P->GetSide() != Sides::ENeutral)
 			{
 				for (size_t j = i + 1; j < W_EntityVec.size(); j++)
@@ -87,9 +95,4 @@ void World::LoadLevels(Render &W_Rend)
 		return;
 	}
 
-	
-
-	Player Player("e");
-
-	Player.Setup();
 }

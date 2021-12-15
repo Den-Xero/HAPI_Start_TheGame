@@ -7,27 +7,22 @@ void Player::UpdateLoop(Render &Rend)
 	//controller, rumble and keybord controls calls.
 	if (ControllarData.isAttached)
 	{
-		P_Con.XboxControls(Pos.X, Pos.Y);
+		P_Con.XboxControls(XPos, YPos);
 
-		P_Con.Rumble(Pos.X, Pos.Y);
+		P_Con.Rumble(XPos, YPos);
 	}
 	else
 	{
-		P_Con.KeyboardControls(Pos.X, Pos.Y);
+		P_Con.KeyboardControls(XPos, YPos);
 	}
 
 	RenderSprite(Rend);
-}
-
-void Player::RenderSprite(Render &Rend)
-{
-	Rend.PlayerSpriteRender(E_SpriteName, Pos.X, Pos.Y);
-
 }
 
 void Player::Setup()
 {
 	P_Con.GetValues();
 
-	Pos = { 100, 200 };
+	XPos = 100;
+	YPos = 200;
 }

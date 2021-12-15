@@ -96,12 +96,14 @@ void Sprite::DrawBackground(float XPos, float YPos, BYTE* R_Screen, int R_Screen
 	}
 }
 
-Border Sprite::PassTexBorder(const std::string& FileName)
+Border Sprite::PassTexBorder(const std::string& FileName, float XPos, float YPos)
 {
-	//GetSprite(FileName);
+	GetSprite(FileName);
 
 	Border TexBorder(0, S_TextureWidth, 0, S_TextureHeight);
+	Border ClippedTexBorder(TexBorder);
+	ClippedTexBorder.Translate(XPos, YPos);
 
-	return TexBorder;
+	return ClippedTexBorder;
 }
 
