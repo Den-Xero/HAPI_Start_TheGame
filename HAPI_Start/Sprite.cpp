@@ -96,14 +96,17 @@ void Sprite::DrawBackground(float XPos, float YPos, BYTE* R_Screen, int R_Screen
 	}
 }
 
-Border Sprite::PassTexBorder(const std::string& FileName, float XPos, float YPos)
+Border Sprite::PassTexBorder(float XPos, float YPos)
 {
-	GetSprite(FileName);
+	/*if (!HAPI.LoadTexture(FileName, &S_TexturePointer, S_TextureWidth, S_TextureHeight))
+	{
+		HAPI.UserMessage("Missing texture", "Error");
+	}*/
 
-	Border TexBorder(0, S_TextureWidth, 0, S_TextureHeight);
-	Border ClippedTexBorder(TexBorder);
-	ClippedTexBorder.Translate(XPos, YPos);
+	Border TexBorder(0, S_TextureWidth - 15, 0, S_TextureHeight - 15);
+	TexBorder.Translate(XPos, YPos);
 
-	return ClippedTexBorder;
+
+	return TexBorder;
 }
 

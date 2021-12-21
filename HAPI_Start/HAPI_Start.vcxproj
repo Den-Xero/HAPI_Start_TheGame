@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Border.cpp" />
+    <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Controls.cpp" />
     <ClCompile Include="Enemies.cpp" />
     <ClCompile Include="Entity.cpp" />
@@ -36,6 +37,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Border.h" />
+    <ClInclude Include="Bullet.h" />
     <ClInclude Include="Controls.h" />
     <ClInclude Include="Enemies.h" />
     <ClInclude Include="Entity.h" />

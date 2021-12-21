@@ -26,7 +26,7 @@ class Sprite
 
 		void DrawBackground(float XPos, float YPos, BYTE* R_Screen, int R_ScreenWidth);
 
-		Border PassTexBorder(const std::string& FileName, float XPos, float YPos);
+		Border PassTexBorder(float XPos, float YPos);
 
 };
 

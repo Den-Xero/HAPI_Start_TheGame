@@ -1,6 +1,7 @@
 #pragma once
 #include "Render.h"
 #include "Controls.h"
+#include <unordered_map>
 
 enum class Sides
 {
@@ -15,28 +16,42 @@ class Entity
 	protected:
 		std::string E_SpriteName;
 		std::string E_FileName;
+
 		float XPos{ 0 };
 		float YPos{ 0 };
+
+		bool Alive{ false };
+
+		int Health{ 0 };
+
 	public:
 
 		Entity(std::string SpriteName, std::string FileName) : E_SpriteName(SpriteName), E_FileName(FileName) {};
 
 		virtual ~Entity() = default;
 
-		virtual void UpdateLoop(Render &Rend) = 0;
+		virtual void UpdateLoop(Render &Rend, int BulletStart, int BulletEnd, std::vector<std::shared_ptr<Entity>>& Vec) = 0;
+
+		virtual void Setup() = 0;
 
 		void RenderSprite(Render& Rend)
 		{
 			Rend.PlayerSpriteRender(E_SpriteName, XPos, YPos);
 		}
 
-		virtual Sides GetSide() const = 0;
+		virtual Sides GetSide() = 0;
 
-		bool CheckForCollision(Entity* One, Entity* Two);
+		bool IsAlive();
 
-		bool IsAnEnemy(Entity* One, Entity* Two)
+		void SetAlive();
+
+		void SetPositions(float X, float Y);
+
+		bool CheckForCollision(std::shared_ptr<Entity> One, std::shared_ptr<Entity> Two, std::unordered_map<std::string, std::shared_ptr<Sprite>> Map);
+
+		bool IsAnEnemy(std::shared_ptr<Entity> One, std::shared_ptr<Entity> Two)
 		{
-			if (One->GetSide() != Two->GetSide() )
+			if (One->GetSide() != Two->GetSide())
 			{
 				return true;
 			}

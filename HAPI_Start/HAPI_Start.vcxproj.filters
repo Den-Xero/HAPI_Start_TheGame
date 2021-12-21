@@ -54,6 +54,9 @@
     <ClCompile Include="Sprite.cpp">
       <Filter>Source Files\World</Filter>
     </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Source Files\World\Entity</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Border.h">
@@ -78,6 +81,9 @@
       <Filter>Header Files\World\Entity</Filter>
     </ClInclude>
     <ClInclude Include="Entity.h">
+      <Filter>Header Files\World\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
       <Filter>Header Files\World\Entity</Filter>
     </ClInclude>
   </ItemGroup>

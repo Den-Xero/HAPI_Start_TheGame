@@ -1,31 +1,38 @@
 #include "Enemies.h"
 
 
-void Enemies::UpdateLoop(Render &Rend)
+void Enemies::UpdateLoop(Render& Rend, int BulletStart, int BulletEnd, std::vector<std::shared_ptr<Entity>>& Vec)
 {
-	RenderSprite(Rend);
-
-	srand(time(NULL));
-
-	if (Count == 100)
+	if (Alive)
 	{
-		XPos += rand() % 50;
+		RenderSprite(Rend);
 
-		YPos += rand() % 50;
+		srand(time(NULL));
+
+		if (Count == 100)
+		{
+			XPos += rand() % 50;
+
+			YPos += rand() % 50;
+			Count++;
+		}
+		else if (Count == 200)
+		{
+			XPos -= rand() % 50;
+
+			YPos -= rand() % 50;
+			Count = 0;
+		}
 		Count++;
 	}
-	else if(Count == 200)
-	{
-		XPos -= rand() % 50;
-
-		YPos -= rand() % 50;
-		Count = 0;
-	}
-	Count++;
 }
 
 void Enemies::Setup()
 {
+	Alive = true;
+
+	Health = 25;
+
 	XPos = rand() % 1004 + 10;
 
 	YPos = rand() % 748 + 10;

@@ -1,17 +1,33 @@
 #include "Entity.h"
 #include "Border.h"
 #include "Sprite.h"
+#include "Render.h"
 
-bool Entity::CheckForCollision(Entity* One, Entity* Two)
+bool Entity::IsAlive()
+{
+	return Alive;
+}
+
+void Entity::SetAlive()
+{
+	Alive = true;
+}
+
+void Entity::SetPositions(float X, float Y)
+{
+	XPos = X;
+	YPos = Y;
+}
+
+bool Entity::CheckForCollision(std::shared_ptr<Entity> One, std::shared_ptr<Entity> Two, std::unordered_map<std::string, std::shared_ptr<Sprite>> Map)
 {
 	Border BorderOne;
 	Border BorderTwo;
-	Sprite Spr;
 
 	// Get One Collision rect
-	BorderOne = Spr.PassTexBorder(One->E_FileName, One->XPos, One->YPos);
+	BorderOne = Map[One->E_SpriteName]->PassTexBorder(One->XPos, One->YPos);
 	// get other collision rect
-	BorderTwo = Spr.PassTexBorder(Two->E_FileName, Two->XPos, Two->YPos);
+	BorderTwo = Map[Two->E_SpriteName]->PassTexBorder(Two->XPos, Two->YPos);
 
 	// check for collision
 	if ((BorderOne.RightSide < BorderTwo.LeftSide || BorderOne.LeftSide > BorderTwo.RightSide) || (BorderOne.BottomSide < BorderTwo.TopSide || BorderOne.TopSide > BorderTwo.BottomSide))

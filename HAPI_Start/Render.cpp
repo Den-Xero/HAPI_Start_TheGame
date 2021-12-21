@@ -87,5 +87,10 @@ int Render::ScreenHeight()
 	return R_ScreenHeight;
 }
 
+std::unordered_map<std::string, std::shared_ptr<Sprite>>& Render::PassMap()
+{
+	return R_SpriteMap;
+}
+
 
 

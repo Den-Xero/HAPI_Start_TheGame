@@ -3,7 +3,6 @@
 
 
 using namespace HAPISPACE;
-
 class Controls
 {
 	private:
@@ -15,16 +14,19 @@ class Controls
 		int PassedTexHeight{ 0 };
 		float Speed{ 4 };
 		float MagSpeed = sqrt(pow(Speed, 2) / 2);
-		
 	public:
 		void KeyboardControls(float &XPos, float &YPos);
 
 		void XboxControls(float &XPos, float &YPos);
 
-		void Rumble(const float& XPos, const float& YPos);
+		void Rumble(int Health);
 
 		void GetValues();
 
 		HAPI_TControllerData SetData();
+
+		bool fireKeyboard();
+
+		bool fireXbox();
 };
 

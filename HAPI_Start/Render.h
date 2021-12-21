@@ -27,5 +27,7 @@ class Render
 
 		int ScreenHeight();
 
+		std::unordered_map<std::string, std::shared_ptr<Sprite>>& PassMap();
+
 };
 

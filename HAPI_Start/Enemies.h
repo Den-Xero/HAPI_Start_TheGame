@@ -12,10 +12,10 @@ class Enemies :
     public:
         Enemies(std::string SpriteName, std::string FileName) : Entity(SpriteName, FileName) {};
 
-        void UpdateLoop(Render &Rend) override final;
+        void UpdateLoop(Render& Rend, int BulletStart, int BulletEnd, std::vector<std::shared_ptr<Entity>>& Vec) override final;
 
-        Sides GetSide() const override { return Sides::EEnemy; }
+        Sides GetSide() override final { return Sides::EEnemy; }
 
-        void Setup();
+        void Setup() override final;
 };
 

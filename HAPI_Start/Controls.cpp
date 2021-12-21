@@ -1,7 +1,7 @@
 #include "Controls.h"
 #include "Render.h"
 #include "Sprite.h"
-
+#include "Bullet.h"
 
 void Controls::GetValues()
 {
@@ -15,6 +15,26 @@ HAPI_TControllerData Controls::SetData()
 {
 	const HAPI_TControllerData& ControllarKeybinds = HAPI.GetControllerData(0);
 	return ControllarKeybinds;
+}
+
+bool Controls::fireKeyboard()
+{
+	if (KeyboardKeybinds.scanCode[HK_SPACE])
+	{
+		return true;
+	}
+	return false;
+}
+
+bool Controls::fireXbox()
+{
+	//Gets the controller data.
+	const HAPI_TControllerData& ControllarKeybinds = HAPI.GetControllerData(0);
+	if (ControllarKeybinds.analogueButtons[HK_ANALOGUE_RIGHT_TRIGGER])
+	{
+		return true;
+	}
+	return false;
 }
 
 void Controls::KeyboardControls(float &XPos, float &YPos)
@@ -101,22 +121,14 @@ void Controls::XboxControls(float& XPos, float& YPos)
 	}
 }
 
-void Controls::Rumble(const float& XPos, const float& YPos)
+void Controls::Rumble(int Health)
 {
 	//sets rumble to 0
 	HAPI.SetControllerRumble(0, 0, 0);
-	//gets a 70 X 70 box in middle of screen.
-	int WidthTestMin = (PassedScreenWidth / 2) - 70;
-	int WidthTestMax = (PassedScreenWidth / 2) + 70;
-	int HeightTestMin = (PassedScreenHeight / 2) - 70;
-	int HeightTestMax = (PassedScreenHeight / 2) + 70;
-	//sees if sprite is in the box and rumbles if it is.
-	if (XPos > WidthTestMin && XPos < WidthTestMax)
+	//sees if sprite is dead.
+	if (Health <= 0)
 	{
-		if (YPos > HeightTestMin && YPos < HeightTestMax)
-		{
-			HAPI.SetControllerRumble(0, 65535, 65535);
-		}
+		HAPI.SetControllerRumble(0, 65535, 65535);
 	}
 }
 
