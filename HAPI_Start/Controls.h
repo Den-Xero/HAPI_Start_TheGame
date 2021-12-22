@@ -14,6 +14,7 @@ class Controls
 		int PassedTexHeight{ 0 };
 		float Speed{ 4 };
 		float MagSpeed = sqrt(pow(Speed, 2) / 2);
+		int Count{ 0 };
 	public:
 		void KeyboardControls(float &XPos, float &YPos);
 

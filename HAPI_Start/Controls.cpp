@@ -19,22 +19,53 @@ HAPI_TControllerData Controls::SetData()
 
 bool Controls::fireKeyboard()
 {
-	if (KeyboardKeybinds.scanCode[HK_SPACE])
+	if (Count == 0)
 	{
-		return true;
+		if (KeyboardKeybinds.scanCode['F'])
+		{
+			Count++;
+			return true;
+		}
 	}
-	return false;
+	else
+	{
+		if (Count == 5)
+		{
+			Count = 0;
+		}
+		else
+		{
+			Count++;
+		}
+		return false;
+	}
 }
 
 bool Controls::fireXbox()
 {
-	//Gets the controller data.
-	const HAPI_TControllerData& ControllarKeybinds = HAPI.GetControllerData(0);
-	if (ControllarKeybinds.analogueButtons[HK_ANALOGUE_RIGHT_TRIGGER])
+	if (Count == 0)
 	{
-		return true;
+		//Gets the controller data.
+		const HAPI_TControllerData& ControllarKeybinds = HAPI.GetControllerData(0);
+		if (ControllarKeybinds.analogueButtons[HK_ANALOGUE_RIGHT_TRIGGER])
+		{
+			return true;
+		}
 	}
-	return false;
+	else
+	{
+		if (Count == 10)
+		{
+			Count = 0;
+		}
+		else
+		{
+			Count++;
+		}
+
+		return false;
+	}
+	
 }
 
 void Controls::KeyboardControls(float &XPos, float &YPos)

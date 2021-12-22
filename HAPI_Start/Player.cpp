@@ -4,6 +4,9 @@
 
 void Player::UpdateLoop(Render& Rend, int BulletStart, int BulletEnd, std::vector<std::shared_ptr<Entity>>& Vec)
 {
+	if (Health <= 0)
+		Alive = false;
+
 	if (Alive)
 	{
 		ControllarData = P_Con.SetData();
@@ -16,7 +19,19 @@ void Player::UpdateLoop(Render& Rend, int BulletStart, int BulletEnd, std::vecto
 
 			if (P_Con.fireXbox())
 			{
+				for (size_t i = BulletStart; i <= BulletEnd; i++)
+				{
+					if (!Vec[i]->IsAlive())
+					{
+						Vec[i]->SetAlive();
 
+						Vec[i]->SetPositions(XPos, YPos);
+
+						Vec[i]->RenderSprite(Rend);
+
+						break;
+					}
+				}
 			}
 		}
 		else
@@ -25,7 +40,6 @@ void Player::UpdateLoop(Render& Rend, int BulletStart, int BulletEnd, std::vecto
 
 			if (P_Con.fireKeyboard())
 			{
-
 				for (size_t i = BulletStart; i <= BulletEnd; i++)
 				{
 					if (!Vec[i]->IsAlive())
@@ -44,6 +58,11 @@ void Player::UpdateLoop(Render& Rend, int BulletStart, int BulletEnd, std::vecto
 
 		RenderSprite(Rend);
 	}
+}
+
+Sides Player::GetSide()
+{
+	return Sides::EPlayer;
 }
 
 void Player::Setup()
