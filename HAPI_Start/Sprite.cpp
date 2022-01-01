@@ -98,10 +98,6 @@ void Sprite::DrawBackground(float XPos, float YPos, BYTE* R_Screen, int R_Screen
 
 Border Sprite::PassTexBorder(float XPos, float YPos)
 {
-	/*if (!HAPI.LoadTexture(FileName, &S_TexturePointer, S_TextureWidth, S_TextureHeight))
-	{
-		HAPI.UserMessage("Missing texture", "Error");
-	}*/
 
 	Border TexBorder(0, S_TextureWidth - 15, 0, S_TextureHeight - 15);
 	TexBorder.Translate(XPos, YPos);

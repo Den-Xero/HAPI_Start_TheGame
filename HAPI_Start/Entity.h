@@ -24,9 +24,13 @@ class Entity
 
 		int Health{ 0 };
 
+		int XDirection{ 0 };
+		int YDirection{ 0 };
+		int Tick{ 0 };
+
 	public:
 
-		Entity(std::string SpriteName, std::string FileName) : E_SpriteName(SpriteName), E_FileName(FileName) {};
+		Entity(std::string SpriteName) : E_SpriteName(SpriteName) {};
 
 		virtual ~Entity() = default;
 
@@ -45,7 +49,7 @@ class Entity
 
 		void SetAlive();
 
-		void SetPositions(float X, float Y);
+		void SetPositions(float X, float Y, int XDirection, int YDirection);
 
 		bool CheckForCollision(std::shared_ptr<Entity> One, std::shared_ptr<Entity> Two, std::unordered_map<std::string, std::shared_ptr<Sprite>> Map);
 

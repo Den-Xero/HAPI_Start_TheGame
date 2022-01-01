@@ -14,10 +14,35 @@ void Entity::SetAlive()
 	Health = 1;
 }
 
-void Entity::SetPositions(float X, float Y)
+void Entity::SetPositions(float X, float Y, int XDir, int YDir)
 {
-	XPos = X + 15;
-	YPos = Y - 25;
+	XDirection = XDir;
+	YDirection = YDir;
+
+	switch (YDir)
+	{
+	case 1:
+		XPos = X + 15;
+		YPos = Y + 50;
+		break;
+	case 2:
+		XPos = X + 15;
+		YPos = Y - 5;
+		break;
+	default:
+		switch (XDir)
+		{
+		case 0:
+			XPos = X + 50;
+			YPos = Y + 20;
+			break;
+		case 1:
+			XPos = X - 15;
+			YPos = Y + 20;
+			break;
+		}
+		break;
+	}
 }
 
 bool Entity::CheckForCollision(std::shared_ptr<Entity> One, std::shared_ptr<Entity> Two, std::unordered_map<std::string, std::shared_ptr<Sprite>> Map)
@@ -43,8 +68,8 @@ bool Entity::CheckForCollision(std::shared_ptr<Entity> One, std::shared_ptr<Enti
 		{
 			// Collision
 			//HAPI.UserMessage("Collision", "Error");
-			One->Health = One->Health - 5;
-			Two->Health = Two->Health - 5;
+			One->Health -= 5;
+			Two->Health -= 5;
 
 			return true;
 		}

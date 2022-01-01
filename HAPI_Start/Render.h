@@ -10,7 +10,7 @@ class Render
 	private:
 		std::unordered_map<std::string, std::shared_ptr<Sprite>> R_SpriteMap;
 		int R_ScreenWidth{ 1024 };
-		int R_ScreenHeight{ 768 };
+		int R_ScreenHeight{ 683 };
 		BYTE* R_Screen{ nullptr };
 	public:
 		bool GetSprite(const std::string& SpriteName, const std::string& FileName);

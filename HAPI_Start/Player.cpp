@@ -6,6 +6,39 @@ void Player::UpdateLoop(Render& Rend, int BulletStart, int BulletEnd, std::vecto
 {
 	if (Health <= 0)
 		Alive = false;
+	switch (XDirection)
+	{
+	case 0:
+		switch (Tick)
+		{
+		case 0:
+			E_SpriteName = "PlayerSpriteRight1";
+			break;
+		case 1:
+			E_SpriteName = "PlayerSpriteRight2";
+			break;
+		case 2:
+			E_SpriteName = "PlayerSpriteRight3";
+			break;
+		}
+		break;
+	case 1:
+		switch (Tick)
+		{
+		case 0:
+			E_SpriteName = "PlayerSpriteLeft1";
+			break;
+		case 1:
+			E_SpriteName = "PlayerSpriteLeft2";
+			break;
+		case 2:
+			E_SpriteName = "PlayerSpriteLeft3";
+			break;
+		}
+		break;
+	default:
+		break;
+	}
 
 	if (Alive)
 	{
@@ -13,7 +46,7 @@ void Player::UpdateLoop(Render& Rend, int BulletStart, int BulletEnd, std::vecto
 		//controller, rumble and keybord controls calls.
 		if (ControllarData.isAttached)
 		{
-			P_Con.XboxControls(XPos, YPos);
+			P_Con.XboxControls(XPos, YPos, XDirection, YDirection, Tick);
 
 			P_Con.Rumble(Health);
 
@@ -25,9 +58,9 @@ void Player::UpdateLoop(Render& Rend, int BulletStart, int BulletEnd, std::vecto
 					{
 						Vec[i]->SetAlive();
 
-						Vec[i]->SetPositions(XPos, YPos);
+						Vec[i]->SetPositions(XPos, YPos, XDirection, YDirection);
 
-						Vec[i]->RenderSprite(Rend);
+						Vec[i]->UpdateLoop(Rend, BulletStart, BulletEnd, Vec);
 
 						break;
 					}
@@ -36,7 +69,7 @@ void Player::UpdateLoop(Render& Rend, int BulletStart, int BulletEnd, std::vecto
 		}
 		else
 		{
-			P_Con.KeyboardControls(XPos, YPos);
+			P_Con.KeyboardControls(XPos, YPos, XDirection, YDirection, Tick);
 
 			if (P_Con.fireKeyboard())
 			{
@@ -46,9 +79,9 @@ void Player::UpdateLoop(Render& Rend, int BulletStart, int BulletEnd, std::vecto
 					{
 						Vec[i]->SetAlive();
 
-						Vec[i]->SetPositions(XPos, YPos);
+						Vec[i]->SetPositions(XPos, YPos, XDirection, YDirection);
 
-						Vec[i]->RenderSprite(Rend);
+						Vec[i]->UpdateLoop(Rend, BulletStart, BulletEnd, Vec);
 
 						break;
 					}

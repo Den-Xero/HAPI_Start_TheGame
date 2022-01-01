@@ -12,11 +12,10 @@ class Player :
 
        HAPI_TControllerData ControllarData;
 
-       std::shared_ptr<Entity> One{NULL};
+       
 
-       bool CheckAlive{false};
     public:
-        Player(std::string SpriteName, std::string FileName) : Entity(SpriteName, FileName) {};
+        Player(std::string SpriteName) : Entity(SpriteName) {};
 
         void UpdateLoop(Render& Rend, int BulletStart, int BulletEnd, std::vector<std::shared_ptr<Entity>>& Vec) override final;
 

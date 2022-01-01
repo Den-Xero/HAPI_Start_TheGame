@@ -7,7 +7,7 @@ class Bullet :
 
     public:
 
-        Bullet(std::string SpriteName, std::string FileName) : Entity(SpriteName, FileName) {};
+        Bullet(std::string SpriteName) : Entity(SpriteName) {};
 
         void UpdateLoop(Render& Rend, int BulletStart, int BulletEnd, std::vector<std::shared_ptr<Entity>>& Vec) override final;
 

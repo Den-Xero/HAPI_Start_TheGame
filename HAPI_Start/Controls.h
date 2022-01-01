@@ -16,9 +16,9 @@ class Controls
 		float MagSpeed = sqrt(pow(Speed, 2) / 2);
 		int Count{ 0 };
 	public:
-		void KeyboardControls(float &XPos, float &YPos);
+		void KeyboardControls(float &XPos, float &YPos, int& XDirection, int& YDirection, int& Tick);
 
-		void XboxControls(float &XPos, float &YPos);
+		void XboxControls(float &XPos, float &YPos, int& XDirection, int& YDirection, int& Tick);
 
 		void Rumble(int Health);
 
