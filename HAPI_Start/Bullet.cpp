@@ -1,11 +1,16 @@
 #include "Bullet.h"
 #include "World.h"
 
-void Bullet::UpdateLoop(Render& Rend, int BulletStart, int BulletEnd, std::vector<std::shared_ptr<Entity>>& Vec)
+void Bullet::UpdateLoop(Render& Rend, int BulletStart, int BulletEnd, std::vector<std::shared_ptr<Entity>>& Vec, int& Score, int& PlayerTickDamage, std::string Difficulty)
 {
-	if (Health <= 0)
-		Alive = false;
+	if (Alive)
+	{
+		//kills sprite if health is 0 or less.
+		if (Health <= 0)
+			Alive = false;
+	}
 
+	//Animations
 	switch (YDirection)
 	{
 	case 1:
@@ -76,6 +81,7 @@ void Bullet::UpdateLoop(Render& Rend, int BulletStart, int BulletEnd, std::vecto
 	{
 		RenderSprite(Rend);
 
+		//movement
 		switch (YDirection)
 		{
 		case 1:
@@ -106,6 +112,7 @@ void Bullet::UpdateLoop(Render& Rend, int BulletStart, int BulletEnd, std::vecto
 			Tick = 0;
 		}
 
+		//killes if goes off screen
 		if (YPos < -10 || YPos > Rend.ScreenHeight() + 10 || XPos < -10 || XPos > Rend.ScreenWidth() + 10)
 		{
 			Alive = false;
@@ -115,11 +122,13 @@ void Bullet::UpdateLoop(Render& Rend, int BulletStart, int BulletEnd, std::vecto
 
 Sides Bullet::GetSide()
 {
+	//sets side of sprite
 	return Sides::EPlayer;
 }
 
 void Bullet::Setup()
 {
+	//sets sprite to not be alive.
 	Alive = false;
 }
 

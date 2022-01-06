@@ -28,13 +28,15 @@ class Entity
 		int YDirection{ 0 };
 		int Tick{ 0 };
 
+		const HAPI_TSoundOptions& Volume = 0.025f;
+
 	public:
 
 		Entity(std::string SpriteName) : E_SpriteName(SpriteName) {};
 
 		virtual ~Entity() = default;
 
-		virtual void UpdateLoop(Render &Rend, int BulletStart, int BulletEnd, std::vector<std::shared_ptr<Entity>>& Vec) = 0;
+		virtual void UpdateLoop(Render &Rend, int BulletStart, int BulletEnd, std::vector<std::shared_ptr<Entity>>& Vec, int& Score, int& PlayerTickDamage, std::string Difficulty) = 0;
 
 		virtual void Setup() = 0;
 

@@ -11,7 +11,13 @@ class Sprite;
 class World
 {
 	private:
-		void LoadLevels(Render &W_Rend);
+		void LoadLevel1(Render &W_Rend);
+
+		void LoadLevel2(Render& W_Rend);
+
+		void LoadLevel3(Render& W_Rend);
+
+		void LoadLevel4(Render& W_Rend);
 
 		std::vector<std::shared_ptr<Entity>> W_EntityVec;
 
@@ -19,7 +25,29 @@ class World
 
 		int W_BulletEndIdex{ 0 };
 
+		int W_EnemyStartIndex{ 0 };
+
+		int W_EnemyEndIndex{ 0 };
+
+		int W_NumOfEnemies{ 0 };
+
+		int W_NumOfAliveEnemies{ 0 };
+
 		std::unordered_map<std::string, std::shared_ptr<Sprite>> Map;
+
+		int Score{0};
+
+		int ScoreBreak{ 0 };
+
+		int LevelCounter{ 0 };
+
+		bool Restarted{ false };
+
+		int PlayerTickDamage{ 0 };
+
+		int BackgroundID{ 0 };
+
+		std::string Difficulty;
 	public:
 		~World()
 		{
@@ -28,8 +56,10 @@ class World
 
 		}
 
-		void Run();
+		void Run(Render& W_Rend);
 
-		//Entity* PassVec(int i);
+		void SetRestarted();
+
+
 };
 

@@ -8,6 +8,7 @@ class Controls
 	private:
 		int MaxControllars = HAPI.GetMaxControllers();
 		const HAPI_TKeyboardData& KeyboardKeybinds = HAPI.GetKeyboardData();
+		const HAPI_TSoundOptions& Volume = 0.025f;
 		int PassedScreenWidth{ 0 };
 		int PassedScreenHeight{ 0 };
 		int PassedTexWidth{ 0 };

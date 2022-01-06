@@ -2,10 +2,55 @@
 #include "Controls.h"
 #include "World.h"
 
-void Player::UpdateLoop(Render& Rend, int BulletStart, int BulletEnd, std::vector<std::shared_ptr<Entity>>& Vec)
+void Player::UpdateLoop(Render& Rend, int BulletStart, int BulletEnd, std::vector<std::shared_ptr<Entity>>& Vec, int& Score, int& PlayerTickDamage, std::string Difficulty)
 {
+	if (PlayerTickDamage > 0)
+	{
+		if (Difficulty == "E")
+		{
+			//takes health off player after enemies go off screen.
+			Health -= PlayerTickDamage;
+			PlayerTickDamage = 0;
+		}
+		else if (Difficulty == "M")
+		{
+			//takes health off player after enemies go off screen.
+			PlayerTickDamage *= 2;
+			Health -= PlayerTickDamage;
+			PlayerTickDamage = 0;
+		}
+		else if (Difficulty == "H")
+		{
+			//takes health off player after enemies go off screen.
+			PlayerTickDamage *= 4;
+			Health -= PlayerTickDamage;
+			PlayerTickDamage = 0;
+		}
+		
+	}
+
+	//puts players health on screen
+	std::string PlayerScore = "Your score is: " + std::to_string(Health);
+	HAPI.RenderText(0, 40, HAPI_TColour::RED, PlayerScore, 20, eBold);
+
 	if (Health <= 0)
+	{
+		//kills sprite if health is 0 or less and ask user if they want to restart.
 		Alive = false;
+		HAPI.UserMessage("You are dead, Your score is: " + std::to_string(Score) + ". Would you like to restart?", "Game over", HAPI_ButtonType::eButtonTypeYesNo, &Response);
+		if (Response == HAPI_UserResponse::eUserResponseYes)
+		{
+			World World;
+			World.SetRestarted();
+			World.Run(Rend);
+		}
+		else
+		{
+			HAPI.Close();
+		}
+	}
+		
+	//Animations
 	switch (XDirection)
 	{
 	case 0:
@@ -42,6 +87,7 @@ void Player::UpdateLoop(Render& Rend, int BulletStart, int BulletEnd, std::vecto
 
 	if (Alive)
 	{
+		//movement and shooting.
 		ControllarData = P_Con.SetData();
 		//controller, rumble and keybord controls calls.
 		if (ControllarData.isAttached)
@@ -60,7 +106,7 @@ void Player::UpdateLoop(Render& Rend, int BulletStart, int BulletEnd, std::vecto
 
 						Vec[i]->SetPositions(XPos, YPos, XDirection, YDirection);
 
-						Vec[i]->UpdateLoop(Rend, BulletStart, BulletEnd, Vec);
+						Vec[i]->UpdateLoop(Rend, BulletStart, BulletEnd, Vec, Score, PlayerTickDamage, Difficulty);
 
 						break;
 					}
@@ -81,7 +127,7 @@ void Player::UpdateLoop(Render& Rend, int BulletStart, int BulletEnd, std::vecto
 
 						Vec[i]->SetPositions(XPos, YPos, XDirection, YDirection);
 
-						Vec[i]->UpdateLoop(Rend, BulletStart, BulletEnd, Vec);
+						Vec[i]->UpdateLoop(Rend, BulletStart, BulletEnd, Vec, Score, PlayerTickDamage, Difficulty);
 
 						break;
 					}
@@ -95,18 +141,20 @@ void Player::UpdateLoop(Render& Rend, int BulletStart, int BulletEnd, std::vecto
 
 Sides Player::GetSide()
 {
+	//sets what side the sprite is on.
 	return Sides::EPlayer;
 }
 
 void Player::Setup()
 {
+	//sets up the sprite with health and positions
 	Alive = true;
 
 	Health = 100;
 
 	P_Con.GetValues();
 
-	XPos = 100;
-	YPos = 200;
+	XPos = 512;
+	YPos = 342;
 }
 

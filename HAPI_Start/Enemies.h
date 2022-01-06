@@ -12,7 +12,7 @@ class Enemies :
     public:
         Enemies(std::string SpriteName) : Entity(SpriteName) {};
 
-        void UpdateLoop(Render& Rend, int BulletStart, int BulletEnd, std::vector<std::shared_ptr<Entity>>& Vec) override final;
+        void UpdateLoop(Render& Rend, int BulletStart, int BulletEnd, std::vector<std::shared_ptr<Entity>>& Vec, int& Score, int& PlayerTickDamage, std::string Difficulty) override final;
 
         Sides GetSide() override final;
 

@@ -19,17 +19,20 @@ HAPI_TControllerData Controls::SetData()
 
 bool Controls::fireKeyboard()
 {
+	
 	if (Count == 0)
 	{
 		if (KeyboardKeybinds.scanCode['F'])
 		{
 			Count++;
+			HAPI.PlaySound("Data\\laserRetro_002.ogg", Volume);
 			return true;
 		}
+		return false;
 	}
 	else
 	{
-		if (Count == 5)
+		if (Count == 15)
 		{
 			Count = 0;
 		}
@@ -49,12 +52,15 @@ bool Controls::fireXbox()
 		const HAPI_TControllerData& ControllarKeybinds = HAPI.GetControllerData(0);
 		if (ControllarKeybinds.analogueButtons[HK_ANALOGUE_RIGHT_TRIGGER])
 		{
+			Count++;
+			HAPI.PlaySound("Data\\laserRetro_002.ogg", Volume);
 			return true;
 		}
+		return false;
 	}
 	else
 	{
-		if (Count == 10)
+		if (Count == 15)
 		{
 			Count = 0;
 		}

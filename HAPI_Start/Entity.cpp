@@ -71,6 +71,8 @@ bool Entity::CheckForCollision(std::shared_ptr<Entity> One, std::shared_ptr<Enti
 			One->Health -= 5;
 			Two->Health -= 5;
 
+			HAPI.PlaySound("Data\\slime_000.ogg", Volume);
+
 			return true;
 		}
 	}

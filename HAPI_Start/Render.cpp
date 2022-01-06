@@ -52,7 +52,7 @@ bool Render::Initialise()
 		return false;
 	R_Screen = HAPI.GetScreenPointer();
 	HAPI.SetShowFPS(true);
-	//HAPI.SetShowCursor(false);
+	HAPI.LimitFrameRate(120);
 	return true;
 }
 

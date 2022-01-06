@@ -18,6 +18,7 @@
 // Include the HAPI header to get access to all of HAPIs interfaces
 #include <HAPI_lib.h>
 #include "World.h"
+#include "Render.h"
 
 
 // HAPI itself is wrapped in the HAPISPACE namespace
@@ -38,7 +39,11 @@ void HAPI_Main()
 {
 	World World;
 
-	World.Run();
+	Render Rend;
+
+	World.Run(Rend);
+
+	return;
 
 	//Render Rend;
 	//calls for initalise and setup
